@@ -14,7 +14,8 @@ exports.uploadItem = async (req, res) => {
       size: req.body.size,
       condition: req.body.condition,
       tags: req.body.tags.split(",").map(tag => tag.trim()),
-      images: imagePaths
+      images: imagePaths,
+      status: "Pending"  // ✅ Ensure default status is set
     });
 
     await newItem.save();
@@ -36,10 +37,10 @@ exports.getMyItems = async (req, res) => {
   }
 };
 
-// Get all approved items (or all items if needed)
+// Get all approved items (for browse page)
 exports.getAllItems = async (req, res) => {
   try {
-    const items = await Item.find().sort({ createdAt: -1 });
+    const items = await Item.find({ status: "Approved" }).sort({ createdAt: -1 }); // ✅ Only approved items
     res.json(items);
   } catch (err) {
     console.error("Error fetching items:", err);
@@ -89,30 +90,11 @@ exports.deleteItem = async (req, res) => {
   }
 };
 
-exports.uploadItem = async (req, res) => {
-  try {
-    const imagePaths = req.files.map(file => file.path);
-
-    const newItem = new Item({
-      userId: req.userId,
-      title: req.body.title,
-      description: req.body.description,
-      category: req.body.category,
-      type: req.body.type,
-      size: req.body.size,
-      condition: req.body.condition,
-      tags: req.body.tags.split(",").map(tag => tag.trim()),
-      images: imagePaths,
-      status: "Pending"  // ✅ Explicit default status
-    });
-
-    await newItem.save();
-    res.status(201).json({ message: "Item uploaded successfully" });
-  } catch (err) {
-    console.error("Upload failed:", err);
-    res.status(500).json({ message: "Failed to upload item" });
-  }
+// Dummy swap & redeem handlers
+exports.swapItem = async (req, res) => {
+  res.status(200).json({ message: "Swap requested successfully" });
 };
 
-
-
+exports.redeemItem = async (req, res) => {
+  res.status(200).json({ message: "Item redeemed successfully" });
+};
