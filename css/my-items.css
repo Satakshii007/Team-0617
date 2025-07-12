@@ -159,3 +159,18 @@ h1 {
   background-color: #2c3e50;
   color: white;
 }
+.item-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px; /* Or adjust based on your card design */
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Optional: shrink on small screens */
+@media (max-width: 600px) {
+  .item-image {
+    max-height: 140px;
+  }
+}
+

@@ -1,5 +1,5 @@
 import { protectPage, getToken } from './auth.js';
-import { BASE_URL } from './config.js';  // ✅ make sure this line is present
+import { BASE_URL } from './config.js';
 
 protectPage();
 
@@ -26,9 +26,14 @@ async function fetchMyItems() {
         const card = document.createElement("div");
         card.className = "item-card";
 
+        const imageSrc = item.images?.[0]
+          ? `${BASE_URL}/${item.images[0].replace(/\\/g, "/")}`
+          : "https://via.placeholder.com/300";
+
         card.innerHTML = `
-          <img src="${item.images?.[0] || 'https://via.placeholder.com/300'}" alt="${item.title}" />
-          <div class="item-info">
+       <img class="item-image" src="${imageSrc}" alt="${item.title}" />
+
+  <div class="item-info">
             <h3>${item.title}</h3>
             <p><strong>Description:</strong> ${item.description}</p>
             <p><strong>Size:</strong> ${item.size}</p>
