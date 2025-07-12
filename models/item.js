@@ -9,7 +9,12 @@ const itemSchema = new mongoose.Schema({
   size: String,
   condition: String,
   tags: [String],
-  images: [String], // Store image URLs or paths
+  images: [String],
+  status: {
+    type: String,
+    enum: ["Pending", "Approved", "Rejected"],
+    default: "Pending"  // ✅ default status
+  },
   createdAt: { type: Date, default: Date.now },
 });
 

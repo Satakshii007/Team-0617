@@ -2,11 +2,23 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const auth = require("../middleware/auth");
+
 const {
   uploadItem,
   getMyItems,
-  getItemById
+  getAllItems,
+  getItemsForAdmin,   // ✅ required for admin panel
+  updateItemStatus,   // ✅ for approve/reject
+  deleteItem          // ✅ for delete
 } = require("../controllers/itemController");
+
+const isAdmin = require("../middleware/isAdmin");
+
+// Admin-only routes
+router.get("/admin", auth, isAdmin, getItemsForAdmin);
+router.put("/:id/status", auth, isAdmin, updateItemStatus);
+router.delete("/:id", auth, isAdmin, deleteItem);
+
 
 // Storage config for multer
 const storage = multer.diskStorage({
@@ -15,13 +27,27 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Route: Upload a new item
+// ------------------ USER ROUTES ------------------
+
+// Upload a new item
 router.post("/add", auth, upload.array("images", 5), uploadItem);
 
-// Route: Get all items of logged-in user
+// Get all items of logged-in user
 router.get("/my", auth, getMyItems);
 
-// ✅ Route: Get one item by its ID
-router.get("/:id", getItemById);
+// Browse all approved items (for home/browse page)
+router.get("/all", auth, getAllItems);
+
+
+// ------------------ ADMIN ROUTES ------------------
+
+// ✅ Get all items (filter by status: Pending, Approved, Rejected)
+router.get("/admin", auth, getItemsForAdmin);
+
+// ✅ Update status of an item (Approve / Reject)
+router.put("/:id/status", auth, updateItemStatus);
+
+// ✅ Delete an item
+router.delete("/:id", auth, deleteItem);
 
 module.exports = router;
