@@ -1,0 +1,9 @@
+# Ignore backend dependencies
+rewear-backend/node_modules/
+
+# Ignore env file
+rewear-backend/.env
+
+# Optional: macOS and log junk
+.DS_Store
+*.log
