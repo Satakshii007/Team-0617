@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Static folder to serve uploaded images
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Connect MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
@@ -22,6 +26,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/items", require("./routes/itemRoutes")); // ✅ Add item upload route
 
 // Test route
 app.get("/test", (req, res) => {
