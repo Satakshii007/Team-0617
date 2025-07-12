@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Item | ReWear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/add-item.css" />
+</head>
+<body>
+  <div class="add-item-container">
+    <h1>Add a New Clothing Item</h1>
+    <form id="add-item-form">
+      <label for="images">Upload Images</label>
+      <input type="file" id="images" name="images" accept="image/*" multiple required />
+
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required />
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="Men">Men</option>
+        <option value="Women">Women</option>
+        <option value="Kids">Kids</option>
+        <option value="Unisex">Unisex</option>
+      </select>
+
+      <label for="type">Type</label>
+      <input type="text" id="type" name="type" placeholder="e.g. Jacket, Kurti, Saree" required />
+
+      <label for="size">Size</label>
+      <input type="text" id="size" name="size" placeholder="e.g. S, M, L, XL" required />
+
+      <label for="condition">Condition</label>
+      <select id="condition" name="condition" required>
+        <option value="">Select Condition</option>
+        <option value="Like New">Like New</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+      </select>
+
+      <label for="tags">Tags (comma-separated)</label>
+      <input type="text" id="tags" name="tags" placeholder="#formal, #winter" required />
+
+      <button type="submit">Submit Item</button>
+    </form>
+    <p id="status-msg"></p>
+  </div>
+
+  <script type="module" src="../js/add-item.js"></script>
+</body>
+</html>

@@ -1,3 +1,6 @@
+// js/register.js
+import { BASE_URL } from "./config.js";
+
 document.getElementById("register-form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -6,10 +9,8 @@ document.getElementById("register-form").addEventListener("submit", async functi
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-msg");
 
-  // Clear previous error
   errorMsg.textContent = "";
 
-  // Basic validation
   if (!name || !email || !password) {
     errorMsg.textContent = "All fields are required.";
     return;
@@ -25,16 +26,16 @@ document.getElementById("register-form").addEventListener("submit", async functi
     });
 
     const data = await res.json();
-    console.log("Register response:", data); // 🔍 Helpful for debugging
+    console.log("Register response:", data);
 
     if (res.ok) {
-      localStorage.setItem("token", data.token); // Optional: auto-login
-      window.location.href = "dashboard.html";   // Redirect
+      localStorage.setItem("token", data.token);
+      window.location.href = "../html/login.html";
     } else {
       errorMsg.textContent = data.message || "Registration failed. Please try again.";
     }
   } catch (error) {
-    console.error("Network error:", error); // Debug in console
+    console.error("Network error:", error);
     errorMsg.textContent = "Network error. Please try again later.";
   }
 });

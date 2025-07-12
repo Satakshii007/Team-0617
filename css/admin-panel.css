@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #ffe6e6, #e0f7fa);
+  color: #2c3e50;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-container {
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding-bottom: 1rem;
+}
+
+.item-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.item-info {
+  padding: 1rem;
+}
+
+.item-info h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.item-info p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.admin-actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.approve-btn { background: #27ae60; color: white; }
+.reject-btn { background: #e74c3c; color: white; }
+.delete-btn { background: #555; color: white; }

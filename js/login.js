@@ -1,3 +1,5 @@
+import { BASE_URL } from "./config.js";
+import { getToken } from "./auth.js";
 document.getElementById("login-form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -15,10 +17,11 @@ document.getElementById("login-form").addEventListener("submit", async function 
     });
 
     const data = await res.json();
+    console.log("Login response data:", data);
 
     if (res.ok) {
       localStorage.setItem("token", data.token); // Store token
-      window.location.href = "dashboard.html"; // Redirect to dashboard
+      window.location.href = "../html/dashboard.html"; // Redirect to dashboard
     } else {
       errorMsg.textContent = data.message || "Login failed. Please try again.";
     }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel | ReWear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/admin-panel.css" />
+</head>
+<body>
+  <div class="admin-container">
+    <h1>🛡️ Admin Panel</h1>
+
+    <div class="filter-section">
+      <label for="status-filter">Filter by status:</label>
+      <select id="status-filter">
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+        <option value="All">All</option>
+      </select>
+    </div>
+
+    <div id="admin-grid" class="item-grid">
+      <!-- Items go here -->
+    </div>
+
+    <p id="status-msg"></p>
+  </div>
+
+  <script type="module" src="../js/admin-panel.js"></script>
+</body>
+</html>
