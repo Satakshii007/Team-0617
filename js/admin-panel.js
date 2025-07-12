@@ -2,7 +2,30 @@ import { getToken, protectPage } from './auth.js';
 
 protectPage();
 
-const BASE_URL = "http://localhost:3000";
+// 🔒 Redirect non-admins to dashboard
+function checkAdminAccess() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../html/login.html";
+    return;
+  }
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (!payload.isAdmin) {
+      alert("Access denied: Admins only.");
+      window.location.href = "../html/dashboard.html";
+    }
+  } catch (err) {
+    console.error("Invalid token", err);
+    window.location.href = "../html/login.html";
+  }
+}
+
+checkAdminAccess();
+
+import { BASE_URL } from './config.js';
+
 const grid = document.getElementById("admin-grid");
 const statusFilter = document.getElementById("status-filter");
 const statusMsg = document.getElementById("status-msg");

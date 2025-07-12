@@ -142,3 +142,20 @@ h1 {
   background-color: #f1c40f;
   color: #2c3e50;
 }
+.back-btn {
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 2px solid #2c3e50;
+  color: #2c3e50;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #2c3e50;
+  color: white;
+}

@@ -1,5 +1,6 @@
 import { BASE_URL } from "./config.js";
 import { getToken } from "./auth.js";
+
 document.getElementById("login-form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -20,8 +21,19 @@ document.getElementById("login-form").addEventListener("submit", async function 
     console.log("Login response data:", data);
 
     if (res.ok) {
-      localStorage.setItem("token", data.token); // Store token
-      window.location.href = "../html/dashboard.html"; // Redirect to dashboard
+      // Store token
+      localStorage.setItem("token", data.token);
+
+      // Decode token to check isAdmin
+      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      const isAdmin = payload.isAdmin;
+
+      // Redirect based on role
+      if (isAdmin) {
+        window.location.href = "../html/admin-panel.html";
+      } else {
+        window.location.href = "../html/dashboard.html";
+      }
     } else {
       errorMsg.textContent = data.message || "Login failed. Please try again.";
     }

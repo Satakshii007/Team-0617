@@ -1,14 +1,14 @@
 import { protectPage, getToken } from './auth.js';
+import { BASE_URL } from './config.js';
 
 protectPage();
 
-const BASE_URL = "http://localhost:3000"; // your API base
 const grid = document.getElementById("browse-grid");
 const statusMsg = document.getElementById("status-msg");
 
-async function fetchApprovedItems() {
+async function fetchAllItems() {
   try {
-    const res = await fetch(`${BASE_URL}/api/items?status=Approved`, {
+    const res = await fetch(`${BASE_URL}/api/items/all`, {
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
@@ -23,9 +23,8 @@ async function fetchApprovedItems() {
       }
 
       data.forEach(item => {
-        const card = document.createElement("a");
+        const card = document.createElement("div");
         card.className = "item-card";
-        card.href = `item-detail.html?id=${item._id}`;
 
         card.innerHTML = `
           <img src="${item.images?.[0] || 'https://via.placeholder.com/300'}" alt="${item.title}">
@@ -33,7 +32,8 @@ async function fetchApprovedItems() {
             <h3>${item.title}</h3>
             <p>Size: ${item.size}</p>
             <p>Type: ${item.type}</p>
-            <span class="status">Available</span>
+            <p>Condition: ${item.condition}</p>
+            <p>Tags: ${item.tags?.join(", ") || '--'}</p>
           </div>
         `;
 
@@ -48,4 +48,4 @@ async function fetchApprovedItems() {
   }
 }
 
-fetchApprovedItems();
+fetchAllItems();
